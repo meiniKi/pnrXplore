@@ -62,80 +62,42 @@ st.select_slider(
 )
 
 with elements("dashboard"):
+
     layout = [
-        dashboard.Item("xoveriter", x=1, y=0, w=4, h=4, isDraggable=True, moved=False, isResizable=True),
+        dashboard.Item("hwploveriter", x=1, y=0, w=1, h=1, isDraggable=True, moved=False, isResizable=True),
         dashboard.Item("render", x=1, y=5, w=1, h=1, isResizable=True, isDraggable=True),
     ]
 
     with dashboard.Grid(layout):
-        #mui.Paper("xoveriter", key="xoveriter")
-        #mui.Paper("Render", key="render")
+        with elements("hwploveriter"):
+            with mui.Box(sx={"height": 100}):
+                DATA = [{
+                    "id": "HPWL",
+                    "color": "hsl(182, 70%, 50%)",
+                    "data" : [
+                        { "x": "0", "y": 10 },
+                        { "x": "1", "y": 20 },
+                        { "x": "2", "y": 50 }
+                    ]
+                }]
 
-        image_style = {
-            'width': '100%',
-            'height': 'auto',
-            'display': 'block',
-        }
+                nivo.Line(
+                    data=DATA,
+                    margin={"top": 10, "right":10, "bottom":40, "left":60},
+                    curve="linear",
+                    lineWidth=4
+                )
 
+        # Render
         with mui.Paper(key="render", type="outlined"):
             with mui.Typography:
                 html.img(
                     src="data:image/png;base64,{}".format(
                         PSHelper.image_path_to_base64(st.session_state["pgs_data_root"]/"positions/pos_{}_{}.png".format(0, st.session_state["pgs_sel_iter_val"]))),
-                    style=image_style)
+                    style=  {
+                                'width': '100%',
+                                'height': 'auto',
+                                'display': 'block',
+                            })
 
 
-        with elements("xoveriter"):
-            DATA = [
-                { "taste": "fruity", "chardonay": 93, "carmenere": 61, "syrah": 114 },
-                { "taste": "bitter", "chardonay": 91, "carmenere": 37, "syrah": 72 },
-                { "taste": "heavy", "chardonay": 56, "carmenere": 95, "syrah": 99 },
-                { "taste": "strong", "chardonay": 64, "carmenere": 90, "syrah": 30 },
-                { "taste": "sunny", "chardonay": 119, "carmenere": 94, "syrah": 103 },
-            ]
-
-            with mui.Box(sx={"height": 500}):
-                nivo.Radar(
-                    data=DATA,
-                    keys=[ "chardonay", "carmenere", "syrah" ],
-                    indexBy="taste",
-                    valueFormat=">-.2f",
-                    margin={ "top": 70, "right": 80, "bottom": 40, "left": 80 },
-                    borderColor={ "from": "color" },
-                    gridLabelOffset=36,
-                    dotSize=10,
-                    dotColor={ "theme": "background" },
-                    dotBorderWidth=2,
-                    motionConfig="wobbly",
-                    legends=[
-                        {
-                            "anchor": "top-left",
-                            "direction": "column",
-                            "translateX": -50,
-                            "translateY": -40,
-                            "itemWidth": 80,
-                            "itemHeight": 20,
-                            "itemTextColor": "#999",
-                            "symbolSize": 12,
-                            "symbolShape": "circle",
-                            "effects": [
-                                {
-                                    "on": "hover",
-                                    "style": {
-                                        "itemTextColor": "#000"
-                                    }
-                                }
-                            ]
-                        }
-                    ],
-                    theme={
-                        "background": "#FFFFFF",
-                        "textColor": "#31333F",
-                        "tooltip": {
-                            "container": {
-                                "background": "#FFFFFF",
-                                "color": "#31333F",
-                            }
-                        }
-                    }
-                )
