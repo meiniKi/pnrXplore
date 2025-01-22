@@ -1,7 +1,6 @@
 
 import streamlit as st
-from streamlit_elements import elements, mui, html, dashboard
-from streamlit_elements import nivo
+from streamlit_elements import elements, mui, html, dashboard, nivo
 from pathlib import Path
 import json
 import base64
