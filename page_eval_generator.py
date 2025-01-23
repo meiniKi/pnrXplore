@@ -1,6 +1,6 @@
 
-from pathlib import PosixPath
-from streamlit_elements import elements, mui, html, dashboard, nivo
+from pathlib import PosixPath, Path
+from streamlit_elements import elements, dashboard
 from typing import Dict, List
 import streamlit as st
 import json
@@ -36,7 +36,7 @@ class PageEvalGenerator:
     @staticmethod
     def generate():
         page_key = st.session_state.page_key
-        page_root = st.session_state.manger_uploaded_root/page_key
+        page_root = Path(st.session_state.manger_uploaded_root)/page_key
         data_key = f"{page_key}_data"
         if not page_key in st.session_state:
             st.session_state.page_key = True

@@ -2,7 +2,7 @@
 from typing import Dict
 import streamlit as st
 from pathlib import PosixPath
-from streamlit_elements import elements, mui, nivo, html
+from streamlit_elements import elements, mui, nivo, html, media
 from page_helper import PageHelper
 from pydoc import locate
 
@@ -39,4 +39,12 @@ class PageEvalElements:
                            'height': 'auto',
                            'display': 'block'}
                         )
+
+    @staticmethod
+    def PnrXploreDashPlayer(item: Dict, page_root: PosixPath):
+        media.Player(
+            url="https://www.youtube.com/watch?v=iik25wqIuFo",
+            controls=True,
+            loop=True
+        )
 

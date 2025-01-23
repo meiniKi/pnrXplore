@@ -2,7 +2,15 @@
 from pathlib import PosixPath
 
 class PnrXploreDashItem:
-    def __init__(self, label:str, key:str, x:int, y:int, w:int, h:int, dragable:bool, resizable:bool):
+    def __init__(self,
+                 label: str, 
+                 key: str, 
+                 x: int, 
+                 y: int, 
+                 w: int=1, 
+                 h: int=1, 
+                 dragable: bool=True, 
+                 resizable: bool=True):
         self.key = key
         self.label = label
         self.layout = {

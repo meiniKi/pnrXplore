@@ -7,12 +7,14 @@ from .pnrxplore_dashboard import PnrXploreDashboard
 from .pnrxplore_dash_item import PnrXploreDashItem
 from .pnrxplore_dash_state_image import PnrXploreDashStateImage
 from .pnrxplore_dash_line import PnrXploreDashLine
+from .pnrxplore_dash_video import PnrXploreDashVideo
 
 __all__ = ['PnrXploreArchive', 
            'PnrXploreSubpage',
            'PnrXploreControlSliderSelect',
            'PnrXploreDashboard',
            'PnrXploreDashStateImage',
-           'PnrXploreDashLine']
+           'PnrXploreDashLine',
+           'PnrXploreDashVideo']
 
 

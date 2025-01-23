@@ -1,7 +1,7 @@
 
 import os
 import shutil
-from typing import List, Dict
+from typing import List, Dict, Optional
 from .pnrxplore_dash_item import PnrXploreDashItem
 from dataclasses import dataclass
 from pathlib import PosixPath
@@ -24,7 +24,7 @@ class PnrXploreDashLine(PnrXploreDashItem):
         legend: str
         legendOffset: int
         legendPosition: str
-        tickValues: List
+        tickValues: Optional[List]
 
     @dataclass
     class Scale():
@@ -67,9 +67,19 @@ class PnrXploreDashLine(PnrXploreDashItem):
             tickPadding=1,
             tickRotation=0,
             legend=self.label,
-            legendOffset=50,
+            legendOffset=0,
             legendPosition='middle',
-            tickValues=list(range(0, len(self.data[-1]["data"])+1, 100))
+            tickValues=[]
+        ))
+
+    def __auto_set_title(self):
+        self.set_option("axisTop", self.Axis(
+            tickSize=0,
+            tickPadding=1,
+            tickRotation=0,
+            legend=self.label,
+            legendOffset=0,
+            legendPosition='middle'
         ))
 
     def __auto_set_xscale(self):
@@ -108,6 +118,8 @@ class PnrXploreDashLine(PnrXploreDashItem):
             self.__auto_set_yscale()
         if not "xScale" in self.options:
             self.__auto_set_xscale()
+
+        self.__auto_set_title()
 
         # TODO: add further options setable if required
         # TODO: generalize for other style plots

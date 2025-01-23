@@ -15,15 +15,17 @@ class Manager:
         )
 
     @staticmethod
-    def __load_page_keys(path: PosixPath):
-        with open(path/"index.json") as f:
-            st.session_state.manger_pages_keys = json.load(f)
+    def __load_page_keys():
+        if (p := st.session_state.get("manger_uploaded_root", None)) is not None:
+            with open(Path(p)/"index.json") as f:
+                st.session_state.manger_pages_keys = json.load(f)
 
     def reset(self):
-        print("reset")
         st.session_state.manger_uploaded_root = None
-        st.session_state.manger_uploaded_root = Path("archives/run/").absolute()
-        self.__load_page_keys(st.session_state.manger_uploaded_root)
+        # For debugging
+        if st.session_state.get("debug", None) is not None:
+            st.session_state.manger_uploaded_root = Path("archives/run/").absolute()
+            self.__load_page_keys()
 
     def generate(self) -> List:
         pages = []
@@ -38,12 +40,18 @@ class Manager:
 
     def run(self):
         pg = None
+
+        pg = st.navigation([st.Page("page_debug.py")])
+        pg.run()
+        return
+
+        if st.session_state.get("manger_pages_keys", None) is None:
+            self.__load_page_keys()
         if st.session_state.get("manger_uploaded_root", None) is None:
-            #pg = st.navigation(self.active_pages)
-            st.error("why here?")
+            pg = st.navigation([st.Page("page_upload.py")])
         else:
-            #pg = st.navigation([st.Page("pages_eval/upload.py")])
-            pg = st.navigation(self.generate())
+            p = self.generate()
+            pg = st.navigation(p)
         pg.run()
 
         #logout_page = st.Page(self.reset, title="Log out", icon=":material/logout:")

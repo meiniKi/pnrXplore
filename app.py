@@ -3,11 +3,10 @@ import streamlit as st
 from manager import Manager
 import json
 
+#st.session_state["debug"] = True
 
-print("Starting...")
 
 if "manager" not in st.session_state:
-    print("Creating Manager...")
     st.session_state.manager = Manager()
 
 
