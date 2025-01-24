@@ -25,4 +25,4 @@ class PnrXploreArchive:
             root_dir=dst_path.with_suffix(""),
             base_dir=dst_path.with_suffix(""))
         
-        shutil.rmtree(dst_path.with_suffix(""))
+        #shutil.rmtree(dst_path.with_suffix(""))

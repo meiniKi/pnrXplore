@@ -1,7 +1,7 @@
 
 import os
 import shutil
-from typing import List, Dict, Optional
+from typing import List, Dict
 from .pnrxplore_dash_item import PnrXploreDashItem
 from dataclasses import dataclass
 from pathlib import PosixPath
@@ -24,7 +24,7 @@ class PnrXploreDashLine(PnrXploreDashItem):
         legend: str
         legendOffset: int
         legendPosition: str
-        tickValues: Optional[List]
+        tickValues: List|None = None
 
     @dataclass
     class Scale():
@@ -101,7 +101,7 @@ class PnrXploreDashLine(PnrXploreDashItem):
         ))
 
     def set_option(self, key, option):
-        self.options[key] = vars(option)
+        self.options[key] = {k: v for k, v in vars(option).items() if v is not None}
 
     def set_line_width(self, width: int=4):
         self.line_width = width

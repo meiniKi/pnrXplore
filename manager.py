@@ -15,10 +15,28 @@ class Manager:
         )
 
     @staticmethod
-    def __load_page_keys():
+    def __load_index():
         if (p := st.session_state.get("manger_uploaded_root", None)) is not None:
             with open(Path(p)/"index.json") as f:
-                st.session_state.manger_pages_keys = json.load(f)
+                st.session_state.manger_pages_dict = json.load(f)
+
+
+    def generate(self) -> List:
+        self.__load_index()
+        pages = [st.Page("page_upload.py")]
+
+        if st.session_state.get("manger_uploaded_root", None) is not None:
+            for p in st.session_state.get("manger_pages_dict", []):
+                print("generate: append: {}".format(p["key"]))
+                # Cannot pass parameters, thus, use some globale storage
+                st.session_state.page_generate_key = p["key"]
+                pages.append(st.Page(
+                    page=PageEvalGenerator.generate,
+                    title=p["title"],
+                    url_path=p["key"]
+                ))
+        st.session_state.pages_generated = pages
+
 
     def reset(self):
         st.session_state.manger_uploaded_root = None
@@ -27,31 +45,14 @@ class Manager:
             st.session_state.manger_uploaded_root = Path("archives/run/").absolute()
             self.__load_page_keys()
 
-    def generate(self) -> List:
-        pages = []
-        for pk in st.session_state.get("manger_pages_keys", []):
-            # Cannot pass parameters, thus, use some globale storage
-            st.session_state.page_key = pk
-            pages.append(st.Page(
-                page=PageEvalGenerator.generate,
-                title="TODO: title"
-            ))
-        return pages
+
 
     def run(self):
         pg = None
-
-        pg = st.navigation([st.Page("page_debug.py")])
-        pg.run()
-        return
-
-        if st.session_state.get("manger_pages_keys", None) is None:
-            self.__load_page_keys()
-        if st.session_state.get("manger_uploaded_root", None) is None:
-            pg = st.navigation([st.Page("page_upload.py")])
-        else:
-            p = self.generate()
-            pg = st.navigation(p)
+        #if st.session_state.get("manger_pages_dict", None) is None:
+        self.generate()
+        pg = st.navigation(st.session_state.pages_generated)
+        st.session_state.page_generate_key = pg.url_path
         pg.run()
 
         #logout_page = st.Page(self.reset, title="Log out", icon=":material/logout:")

@@ -4,6 +4,7 @@ from pathlib import PosixPath
 import ujson
 from .pnrxplore_control import PnrXploreControl
 from .pnrxplore_dashboard import PnrXploreDashboard
+from .pnrxplore_video_select import PnrXploreVideoSelect
 
 
 class PnrXploreSubpage:
@@ -13,7 +14,7 @@ class PnrXploreSubpage:
         self.title = title
         self.elements = []
 
-    def add_element(self, element: PnrXploreControl|PnrXploreDashboard):
+    def add_element(self, element: PnrXploreControl|PnrXploreDashboard|PnrXploreVideoSelect):
         self.elements.append(element)
 
     def archive(self, parent: PosixPath) -> str:
@@ -30,5 +31,5 @@ class PnrXploreSubpage:
         with open(parent/self.key/"data.json", "w") as f:
             ujson.dump({"key": self.key, "title": self.title, "elements": d}, f, indent=4)
 
-        return self.key
+        return {"key": self.key, "title": self.title}
 

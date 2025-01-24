@@ -6,10 +6,16 @@ from streamlit_elements import elements, mui, nivo, html, media
 from page_helper import PageHelper
 from pydoc import locate
 
-class PageEvalElements:
+class PageEvalItems:
     @staticmethod
     def PnrXploreControlSliderSelect(item: Dict):
         st.select_slider(
+            label=item["label"],
+            key=item["key"],
+            options=item["options"])
+        
+    def PnrXploreControlBoxSelect(item: Dict):
+        st.selectbox(
             label=item["label"],
             key=item["key"],
             options=item["options"])
@@ -39,12 +45,3 @@ class PageEvalElements:
                            'height': 'auto',
                            'display': 'block'}
                         )
-
-    @staticmethod
-    def PnrXploreDashPlayer(item: Dict, page_root: PosixPath):
-        media.Player(
-            url="https://www.youtube.com/watch?v=iik25wqIuFo",
-            controls=True,
-            loop=True
-        )
-
