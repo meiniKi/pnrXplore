@@ -3,13 +3,14 @@ import shutil
 import ujson
 from pathlib import PosixPath
 from .pnrxplore_subpage import PnrXploreSubpage
+from .templates import PnrXploreTemplatePage
 
 
-class PnrXploreArchive:
+class PnrXploreBundle:
     def __init__(self):
         self.pages = []
 
-    def add_page(self, page: PnrXploreSubpage):
+    def add_page(self, page: PnrXploreSubpage | PnrXploreTemplatePage):
         self.pages.append(page)
 
     def archive(self, dst_path: PosixPath):

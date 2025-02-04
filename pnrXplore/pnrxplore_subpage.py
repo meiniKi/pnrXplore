@@ -1,9 +1,10 @@
 import os
 from pathlib import PosixPath
 import ujson
-from controls import *
-from dashboard import *
-from templates import *
+import logging
+from .controls import *
+from .dashboard import *
+from .templates import *
 
 
 class PnrXploreSubpage:
@@ -13,9 +14,7 @@ class PnrXploreSubpage:
         self.title = title
         self.components = []
 
-    def add_component(
-        self, component: PnrXploreControl | PnrXploreDashboard | PnrXploreTemplate
-    ):
+    def add_component(self, component: PnrXploreControl | PnrXploreDashboard):
         self.components.append(component)
 
     def archive(self, parent: PosixPath) -> str:
@@ -31,7 +30,13 @@ class PnrXploreSubpage:
 
         with open(parent / self.key / "data.json", "w") as f:
             ujson.dump(
-                {"key": self.key, "title": self.title, "components": d}, f, indent=4
+                {
+                    "key": self.key,
+                    "title": self.title,
+                    "type": "constructed",
+                    "components": d,
+                },
+                f,
+                indent=4,
             )
-
         return {"key": self.key, "title": self.title}

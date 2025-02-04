@@ -1,5 +1,5 @@
-from typing import List, Dict
-from pnrXplore.dashboard.pnrxplore_dash_item import PnrXploreDashItem
+from typing import List, Dict, Literal
+from .pnrxplore_dash_item import PnrXploreDashItem
 from dataclasses import dataclass
 from pathlib import PosixPath
 
@@ -50,9 +50,20 @@ class PnrXploreDashLine(PnrXploreDashItem):
         self.enable_points = False
         self.enable_xgrid = False
         self.enable_ygrid = True
+        self.markers = []
 
     def add_trace(self, data_key: str, color: str, data: Dict):
         self.data.append({"id": data_key, "color": color, "data": data})
+
+    def add_dynamic_marker(self, axis: Literal["x"] | Literal["y"], value_key: str):
+        self.markers.append(
+            {
+                "axis": axis,
+                "value": value_key,
+                "lineStyle": {"stroke": "#aba803", "strokeWidth": 2},
+                "legendOrientation": "vertical",
+            }
+        )
 
     def __auto_set_xaxis(self):
         self.set_option(
@@ -92,6 +103,7 @@ class PnrXploreDashLine(PnrXploreDashItem):
                 legend=self.label,
                 legendOffset=0,
                 legendPosition="middle",
+                tickValues=[],
             ),
         )
 
@@ -179,6 +191,7 @@ class PnrXploreDashLine(PnrXploreDashItem):
             "enablePoints": self.enable_points,
             "enableGridX": self.enable_xgrid,
             "enableGridY": self.enable_ygrid,
+            "markers": self.markers,
         }
 
         item_content_dict |= self.options | theme_dict | legends_dict

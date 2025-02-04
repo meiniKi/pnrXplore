@@ -1,6 +1,6 @@
 from pathlib import PosixPath
 from typing import List
-from pnrXplore.dashboard.pnrxplore_dash_item import PnrXploreDashItem
+from .pnrxplore_dash_item import PnrXploreDashItem
 
 
 class PnrXploreDashboard:

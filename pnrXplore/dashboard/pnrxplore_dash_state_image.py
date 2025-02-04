@@ -1,7 +1,7 @@
 import os
 import shutil
 from typing import List
-from pnrXplore.dashboard.pnrxplore_dash_item import PnrXploreDashItem
+from .pnrxplore_dash_item import PnrXploreDashItem
 from pathlib import PosixPath
 
 
