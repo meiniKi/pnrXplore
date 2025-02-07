@@ -7,7 +7,7 @@ from .dashboard import *
 from .templates import *
 
 
-class PnrXploreSubpage:
+class PnrXplorePage:
     def __init__(self, label: str, key: str, title: str | None = None):
         self.label = label
         self.key = key
