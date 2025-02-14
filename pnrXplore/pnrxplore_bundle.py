@@ -10,20 +10,28 @@ from .templates import PnrXploreTemplatePage
 class PnrXploreBundle:
     def __init__(self):
         self.pages = []
+        self.tmp_folder = None
 
     def add_page(self, page: PnrXplorePage | PnrXploreTemplatePage):
         self.pages.append(page)
 
-    def archive(self, dst_path: PosixPath, format: Literal["zip"] | Literal["tar"]):
-        os.makedirs(dst_path.with_suffix(""), exist_ok=True)
-        pages_dict = [p.archive(dst_path.with_suffix("")) for p in self.pages]
-        with open(dst_path.with_suffix("") / "index.json", "w") as f:
+    def archive(
+        self,
+        dst_path: PosixPath,
+        format: Literal["zip"] | Literal["tar"],
+        keep_tmp: bool = False,
+    ):
+        self.tmp_folder = dst_path.parent / "tmp_{}".format(os.urandom(8).hex())
+        os.makedirs(self.tmp_folder, exist_ok=False)
+        pages_dict = [p.archive(self.tmp_folder) for p in self.pages]
+        with open(self.tmp_folder / "index.json", "w") as f:
             ujson.dump(pages_dict, f)
 
         shutil.make_archive(
-            dst_path.with_suffix(""),
+            base_name=dst_path.with_suffix(""),
             format=format,
-            root_dir=dst_path.with_suffix(""),
+            root_dir=self.tmp_folder,
         )
 
-        shutil.rmtree(dst_path.with_suffix(""))
+        if not keep_tmp:
+            shutil.rmtree(self.tmp_folder)
