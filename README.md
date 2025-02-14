@@ -6,7 +6,7 @@ pnrXplore is a Python package that bundles data from CAD/EDA physical design imp
 
 The best starting point is the provided example in `example/bundle.py`. Running the example provides a bundle that can be uploaded to the viewer. Optionally, install the package in a virtual environment, as in the snippet below.
 
-```bASH
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e .
