@@ -9,5 +9,6 @@ The best starting point is the provided example in `example/bundle.py`. Running 
 ```bASH
 python3 -m venv .venv
 source .venv/bin/activate
+pip install -e .
 python example/bundle.py
 ```
