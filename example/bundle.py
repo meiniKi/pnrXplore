@@ -396,7 +396,7 @@ bundle.add_page(page)
 default_code = """
 print("Pages: {}".format(get_pages()))
 
-d = get_page_data("pstatic_plots")
+d = get_page_data("placer_dashboard")
 
 
 data = d["components"]["dashboard"][0]["item_content"]["data"][0]["data"]
