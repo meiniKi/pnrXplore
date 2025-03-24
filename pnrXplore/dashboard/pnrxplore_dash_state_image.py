@@ -4,8 +4,8 @@ from typing import List
 from .pnrxplore_dash_item import PnrXploreDashItem
 from pathlib import PosixPath
 
-
 class PnrXploreDashStateImage(PnrXploreDashItem):
+    """Dashboard item to display an image of a certain state, e.g., the current placement solution"""
     def __init__(
         self,
         images: List[PosixPath],

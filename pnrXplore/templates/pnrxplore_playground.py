@@ -6,6 +6,8 @@ from .pnrxplore_template_page import PnrXploreTemplatePage
 
 
 class PnrXplorePlayground(PnrXploreTemplatePage):
+    """Template for a Python playground page. Notes that this is highly insecure in
+        unrusted environments. Requires sandboxing."""
     def __init__(self, label: str, key: str, title: str | None = None, code: str = ""):
         logging.warning(
             "PnrXplorePlayground currently is highly insecure if run in an untrusted environment!"

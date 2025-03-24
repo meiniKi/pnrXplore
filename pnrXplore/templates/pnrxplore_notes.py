@@ -5,6 +5,7 @@ from .pnrxplore_template_page import PnrXploreTemplatePage
 
 
 class PnrXploreNotes(PnrXploreTemplatePage):
+    """A page with markdown notes and interactive editor."""
     def __init__(
         self, label: str, key: str, title: str | None = None, markdown: str = ""
     ):

@@ -2,6 +2,7 @@ from pathlib import PosixPath
 
 
 class PnrXploreDashItem:
+    """Abstract class as basis for dashboard items."""
     def __init__(
         self,
         label: str,

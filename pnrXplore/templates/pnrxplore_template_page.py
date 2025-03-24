@@ -5,6 +5,7 @@ import ujson
 
 
 class PnrXploreTemplatePage:
+    """Basis class for all templated pages."""
     def __init__(self, label: str, key: str, title: str | None = None):
         self.label = label
         self.key = key

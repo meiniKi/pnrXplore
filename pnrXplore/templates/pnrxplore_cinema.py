@@ -5,6 +5,7 @@ from .pnrxplore_template_page import PnrXploreTemplatePage
 
 
 class PnrXploreCinema(PnrXploreTemplatePage):
+    """Page to display video renderings."""
     def __init__(self, label: str, key: str, title: str | None = None):
         super().__init__(label, key, title)
         self.data = list()

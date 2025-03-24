@@ -5,7 +5,7 @@ from pathlib import PosixPath
 
 
 class PnrXploreDashLine(PnrXploreDashItem):
-
+    """Line plot dashboard item. Currently restricted to a subset of options available in the viewer."""
     @dataclass
     class Margin:
         top: int

@@ -1,6 +1,12 @@
-# pnrXplore
+# ![](./pnrXplore.ico) pnrXplore
 
-pnrXplore is a Python package to bundle data from CAD and EDA physical design implementation (e.g., place & route) for pnrXplore-viewer. Take a look at [pnrXplore-viewer](https://github.com/meiniKi/pnrXplore-viewer) for more information.
+pnrXplore is a Python package to bundle data from CAD and EDA physical design implementation (e.g., place&route) for the pnrXplore-viewer and archiving. Take a look at [pnrXplore-viewer](https://github.com/meiniKi/pnrXplore-viewer) for more information.
+
+
+## Objective
+
+pnrXplore aims to bundle data from CAD and EDA experiments into pre-processed bundles that can viewed or archived. As the custom requirements can broadly vary, pnrXplore defines the GUI/viewer layout by allocating certain GUI elements to the data. This can be done using predefined templates or more fine-grained building block components (or a mix of both). The created bundle consists of a file hierarchy with all data and a description of their presentation. No code is generated directly to allow alternative further processing and ensure resilience to API changes in the underlying visualization framework. pnrXplore (and pnrXplore-viewer) provides a basic set of presentation options and can be extended to further needs.
+In contrast to generic data set viewers, pnrXplore relies on a detailed description of how to present data (by Python code). This only needs to be done once for every use case. An example is given in [bundle.py](example/bundle.py).
 
 > [!TIP]
 > More information can be found [here](https://github.com/meiniKi/pnrXplore-viewer).
@@ -20,6 +26,8 @@ python example/bundle.py
 ```
 
 ### Templates
+
+Templates are predefined pages in the viewer that are tailored to a specific use case. A selection of available templates is presented below.
 
 <table>
 <tr>
@@ -60,7 +68,7 @@ PnrXploreNotes(
 
 
 <tr> <td>
-<b>Playground:</b> Python playground to run Python code in pnrXplore-viewer. It can print or plot data on the provided bundle during discussions or explorations. Note that the execution environment currently is not sandboxed and, thus, cannot be used in untrusted environments.
+<b>Playground:</b> Python playground to run Python code in pnrXplore-viewer. It can print or plot data on the provided bundle during discussions or explorations. Note that the execution environment currently is <i>not sandboxed</i> and, thus, cannot be used in untrusted environments.
 </td> <td>
 
 ```python
@@ -92,6 +100,8 @@ PnrXploreNextpnrViewer(
 </table>
 
 ### Components
+
+Components are building blocks to, e.g., create dashboards of connected data. A selection of available components is presented below.
 
 <table>
 <tr>
