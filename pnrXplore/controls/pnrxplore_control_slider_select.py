@@ -4,6 +4,7 @@ from .pnrxplore_control import PnrXploreControl
 
 
 class PnrXploreControlSliderSelect(PnrXploreControl):
+    """Slider to select one of a discrete number of options."""
     def __init__(
         self, label: str, key: str, options: List[str | float | int] | None = None
     ):

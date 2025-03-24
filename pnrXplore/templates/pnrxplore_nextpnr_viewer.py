@@ -6,6 +6,8 @@ from .pnrxplore_template_page import PnrXploreTemplatePage
 
 
 class PnrXploreNextpnrViewer(PnrXploreTemplatePage):
+    """A page embedding the nextpnr viewer to visualize the target
+    FPGA architecture and implemented design."""""
     def __init__(
         self,
         label: str,

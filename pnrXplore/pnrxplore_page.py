@@ -8,6 +8,7 @@ from .templates import *
 
 
 class PnrXplorePage:
+    """A page in the viewer that consists of components. It can be added to the bundle."""
     def __init__(self, label: str, key: str, title: str | None = None):
         self.label = label
         self.key = key

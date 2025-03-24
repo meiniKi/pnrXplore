@@ -8,6 +8,7 @@ from .templates import PnrXploreTemplatePage
 
 
 class PnrXploreBundle:
+    """The bundle of all data and visualization descriptions, i.e., allocated pages and components."""
     def __init__(self):
         self.pages = []
         self.tmp_folder = None

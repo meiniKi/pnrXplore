@@ -4,6 +4,7 @@ from .pnrxplore_dash_item import PnrXploreDashItem
 
 
 class PnrXploreDashboard:
+    """Defines a dashboard that consists of items (PnrXploreDashItem)."""
     component_type = "dashboard"
 
     def __init__(self):

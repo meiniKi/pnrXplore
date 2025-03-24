@@ -8,6 +8,8 @@ from dataclasses import dataclass, asdict
 
 
 class PnrXploreOverview(PnrXploreTemplatePage):
+    """A page dedicated to providing a summary of the most relevant data."""
+
     @dataclass
     class Table:
         title: str
